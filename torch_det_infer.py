@@ -154,15 +154,15 @@ def draw_bbox(img_path, result, color=(0, 0, 255), thickness=2):
         cv2.polylines(img_path, [point], True, color, thickness)
     return img_path
 
-def img_nchw(img):
+def img_nchw(img, size=640):
     mean = 0.5
     std = 0.5
-    resize_ratio = min((640 / img.shape[0]),(640/img.shape[1]))
+    resize_ratio = min((size / img.shape[0]),(size/img.shape[1]))
     img = cv2.resize(img,(0,0),fx=resize_ratio,fy= resize_ratio,interpolation=cv2.INTER_LINEAR)
     h,w= img.shape[:2]
-    if h == 640:
+    if h == size:
         w = (math.ceil(w/32)+1)*32
-    elif w == 640:
+    elif w == size:
         h = (math.ceil(h/32)+1)*32
     img1 = narrow(img,(w,h))
 
